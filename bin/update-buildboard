@@ -8,7 +8,8 @@ require 'cijoe/build'
 
 raise("Couldn't find file #{ARGV[0]}") unless File.exists?(ARGV[0])
 
-build = CIJoe::Build.load(ARGV[0])
+build_file = File.join(ARGV[0], '.git', 'builds', 'last')
+build = CIJoe::Build.load(build_file)
 Net::HTTP.post_form(URI.parse("http://localhost:5678/"),
                     {
                       :output => build.output,
