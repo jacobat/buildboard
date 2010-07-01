@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "buildboard"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Integrity style dashboard for CI Joe}
+    gem.description = %Q{Buildboard is an Integrity style dashboard for CI Joe}
     gem.email = "jacob@incremental.dk"
     gem.homepage = "http://github.com/jacobat/buildboard"
     gem.authors = ["Jacob Atzen"]
