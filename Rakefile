@@ -11,6 +11,8 @@ begin
     gem.homepage = "http://github.com/jacobat/buildboard"
     gem.authors = ["Jacob Atzen"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
+    gem.add_dependency 'vegas'
+    gem.add_dependency 'sinatra'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
