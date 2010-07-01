@@ -7,6 +7,13 @@ aggregation of the output from a continuous integration system like CI Joe.
 [1]: http://www.integrityapp.com
 [2]: http://github.com/defunkt/cijoe
 
+## Screenshots:
+
+The project details page:
+
+![Details](http://img.skitch.com/20100701-frm785bnmwtssiqg336mcbcmc9.png)
+
+
 ## Getting started
 
 To get started run:
