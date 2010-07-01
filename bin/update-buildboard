@@ -5,12 +5,48 @@ require 'uri'
 require 'fileutils'
 require 'net/http'
 require 'cijoe/build'
+require 'choice'
 
-raise("Couldn't find file #{ARGV[0]}") unless File.exists?(ARGV[0])
+Choice.options do
+  header ''
+  header 'Specific options:'
 
-build_file = File.join(ARGV[0], '.git', 'builds', 'last')
+  option :host do
+    short '-h'
+    long '--host=HOST'
+    desc 'The hostname or ip of the host running buildboard (default 127.0.0.1)'
+    default '127.0.0.1'
+  end
+
+  option :port do
+    short '-p'
+    long '--port=PORT'
+    desc 'The port buildboard is running on (default 5678)'
+    cast Integer
+    default 5678
+  end
+
+  option :directory do
+    short '-d'
+    long '--directory=DIRECTORY'
+    desc 'The directory containing the CI Joe repository'
+  end
+
+  separator ''
+  separator 'Common options: '
+
+  option :help do
+    long '--help'
+    desc 'Show this message'
+  end
+end
+
+puts "You must supply a directory" and exit 1 unless Choice.choices[:directory]
+
+build_file = File.join(Choice.choices[:directory], '.git', 'builds', 'last')
+raise("Couldn't find file #{build_file}") unless File.exists?(build_file)
 build = CIJoe::Build.load(build_file)
-Net::HTTP.post_form(URI.parse("http://localhost:5678/"),
+Net::HTTP.post_form(URI.parse("http://#{Choice.choices[:host]}:#{Choice.choices[:port]}/"),
                     {
                       :output => build.output,
                       :status => build.status == :failed ? 'failed' : 'success',
