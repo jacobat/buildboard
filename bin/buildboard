@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'vegas'
+require File.expand_path(File.dirname(__FILE__) + '/../lib/buildboard.rb')
+
+Vegas::Runner.new(Buildboard, 'buildboard')
