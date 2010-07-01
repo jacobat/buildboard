@@ -3,7 +3,7 @@ require 'sinatra'
 require 'yaml'
 require 'fileutils'
 
-class Build < Struct.new(:sha, :started_at, :finished_at, :status, :output, :project, :path)
+class Build < Struct.new(:sha, :started_at, :finished_at, :status, :output, :project, :path, :git)
   class << self
     def load_file(filename)
       build_data = YAML::load_file(filename)
@@ -13,7 +13,8 @@ class Build < Struct.new(:sha, :started_at, :finished_at, :status, :output, :pro
           build_data['status'],
           build_data['output'],
           build_data['project'],
-          filename)
+          filename,
+          build_data['git'])
     end
   end
   

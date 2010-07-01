@@ -1,11 +1,7 @@
 <div class='<%= build.status %>' id='build'>
   <h1>Build <%= build.sha[0..7] %> <%= build.status %></h1>
-  <blockquote>
-    <p>TODO: Commit message</p>
-    <p class='meta'><span class='who'>by: TODO: Author</span>
-    |
-    <span class='when' title='<%= build.finished_at %>'>on <%= build.finished_at.strftime("%b %d %H:%M") %></span>
-  </blockquote>
+  <h2>Git Log:</h2>
+  <pre class='output'><%= h(build.git) %></pre>
   <h2>Build Output:</h2>
   <pre class='output'><%= h(build.output) %></pre>
 </div>
