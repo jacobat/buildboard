@@ -4,8 +4,11 @@
         <% build = @builds.shift %>
         <%= erb(:_build, :locals => { :build => build }) %>
         <% @builds.each do |build| %>
-          <%= erb(:_buildline, :locals => { :build => build,
-                                            :link => "#{build.project}/#{build.file}" })%>
+          <%= erb(:_buildline,
+                  :layout => false,
+                  :locals => { :build => build,
+                               :title => build.sha[0..7],
+                               :link  => "#{build.project}/#{build.file}" }) %>
         <% end %>
       </ul>
     </div>

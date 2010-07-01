@@ -2,8 +2,11 @@
     <div id='content'>
       <ul id='projects'>
         <% @builds.each do |build| %>
-          <%= erb(:_buildline, :layout => false, :locals => { :build => build,
-                                                              :link  => build.project }) %>
+          <%= erb(:_buildline,
+                  :layout => false,
+                  :locals => { :build => build,
+                               :title => build.project,
+                               :link  => build.project }) %>
         <% end %>
       </ul>
     </div>
