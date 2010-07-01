@@ -108,7 +108,8 @@ class Buildboard < Sinatra::Base
   end
   
   set :public, File.dirname(__FILE__) + '/../public'
-  
+  set :views, File.dirname(__FILE__) + '/../views'
+
   get '/' do
     @builds = Builder.projects
     erb :index
