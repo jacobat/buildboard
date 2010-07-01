@@ -76,7 +76,7 @@ class Builder
     end
 
     def build_dir
-      'builds'
+      File.join(ENV['HOME'], '.buildboard')
     end
   end
 
