@@ -1,0 +1,4 @@
+    <%= erb(:_header, :locals => { :header_items => [ 'projects', @build.project, @build.sha[0..7]]})%>
+    <div id='content'>
+      <%= erb(:_build, :layout => false, :locals => { :build => @build }) %>
+    </div>

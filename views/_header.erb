@@ -1,0 +1,16 @@
+<div id='header'>
+  <h1>
+    <% header_items.each do |item| %>
+      <% if item == header_items.last %>
+        <%= item %>
+      <% elsif item == header_items.first %>
+      <a href="/"><%= item %></a> /
+      <% else %>
+        <a href="/<%= item %>"><%= item %></a> /
+      <% end%>
+    <% end %>
+  </h1>
+  <address class='watermark'>
+    <a href="/">buildboard</a>
+  </address>
+</div>

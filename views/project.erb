@@ -1,0 +1,11 @@
+    <%= erb(:_header, :locals => { :header_items => [ 'projects', @projectname] })%>
+    <div id='content'>
+      <ul id='projects'>
+        <% build = @builds.shift %>
+        <%= erb(:_build, :locals => { :build => build }) %>
+        <% @builds.each do |build| %>
+          <%= erb(:_buildline, :locals => { :build => build,
+                                            :link => "#{build.project}/#{build.file}" })%>
+        <% end %>
+      </ul>
+    </div>

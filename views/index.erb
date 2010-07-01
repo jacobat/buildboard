@@ -1,0 +1,9 @@
+    <%= erb(:_header, :locals => { :header_items => [ 'projects' ]})%>
+    <div id='content'>
+      <ul id='projects'>
+        <% @builds.each do |build| %>
+          <%= erb(:_buildline, :layout => false, :locals => { :build => build,
+                                                              :link  => build.project }) %>
+        <% end %>
+      </ul>
+    </div>
