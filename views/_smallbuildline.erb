@@ -1,0 +1,6 @@
+<li class='<%= build.status %>'>
+  <a href='/<%= "#{build.project}/#{build.file}" %>'>
+    <strong class='build'>Build <%= build.sha[0..7] %></strong>
+    <span class='attribution'>by <%= build.author %> on <%= build.finished_at.strftime("%b %d") %></span>
+  </a>
+</li>

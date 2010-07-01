@@ -2,9 +2,10 @@
     <div id='content'>
       <% build = @builds.shift %>
       <%= erb(:_build, :locals => { :build => build }) %>
-      <ul id='projects'>
+      <h2>Builds</h2>
+      <ul id='previous_builds'>
         <% @builds.each do |build| %>
-          <%= erb(:_buildline,
+          <%= erb(:_smallbuildline,
                   :layout => false,
                   :locals => { :build => build,
                                :title => build.sha[0..7],

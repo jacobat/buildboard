@@ -25,6 +25,10 @@ class Build < Struct.new(:sha, :started_at, :finished_at, :status, :output, :pro
   def file
     File.basename(path)
   end
+  
+  def author
+    git.match(/Author: (.*?) \</).to_a[1]
+  end
 end
 
 class Builder
@@ -50,14 +54,14 @@ class Builder
     # Borrowed from the Rails security guide:
     # http://guides.rubyonrails.org/security.html#file-uploads
     def sanitize_filename(filename)
-      returning filename.strip do |name|
-        # NOTE: File.basename doesn't work right with Windows paths on Unix
-        # get only the filename, not the whole path
-        name.gsub! /^.*(\\|\/)/, ''
-        # Finally, replace all non alphanumeric, underscore
-        # or periods with underscore
-        name.gsub! /[^\w\.\-]/, '_'
-      end
+      name = filename.strip
+      # NOTE: File.basename doesn't work right with Windows paths on Unix
+      # get only the filename, not the whole path
+      name.gsub! /^.*(\\|\/)/, ''
+      # Finally, replace all non alphanumeric, underscore
+      # or periods with underscore
+      name.gsub! /[^\w\.\-]/, '_'
+      name
     end
 
     def builds
