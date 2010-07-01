@@ -38,13 +38,26 @@ class Builder
     end
 
     def find(projectname, filename)
-      Build.load_file(File.join(build_dir, projectname, filename))
+      Build.load_file(File.join(build_dir, sanitize_filename(projectname), sanitize_filename(filename)))
     end
 
     def builds_for(projectname)
-      Dir[File.join(build_dir, projectname, '*-*-*')].reverse[0..9].map{|build|
+      Dir[File.join(build_dir, sanitize_filename(projectname), '*-*-*')].reverse[0..9].map{|build|
         Build.load_file(build)
       }
+    end
+
+    # Borrowed from the Rails security guide:
+    # http://guides.rubyonrails.org/security.html#file-uploads
+    def sanitize_filename(filename)
+      returning filename.strip do |name|
+        # NOTE: File.basename doesn't work right with Windows paths on Unix
+        # get only the filename, not the whole path
+        name.gsub! /^.*(\\|\/)/, ''
+        # Finally, replace all non alphanumeric, underscore
+        # or periods with underscore
+        name.gsub! /[^\w\.\-]/, '_'
+      end
     end
 
     def builds
