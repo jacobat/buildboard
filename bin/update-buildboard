@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'uri'
+require 'fileutils'
+require 'net/http'
+require 'cijoe/build'
+
+raise("Couldn't find file #{ARGV[0]}") unless File.exists?(ARGV[0])
+
+build = CIJoe::Build.load(ARGV[0])
+Net::HTTP.post_form(URI.parse("http://localhost:5678/"),
+                    {
+                      :output => build.output,
+                      :status => build.status == :failed ? 'failed' : 'success',
+                      :sha => build.sha,
+                      :started_at => build.started_at,
+                      :finished_at => build.finished_at,
+                      :project => build.project,
+                      :git => `git log -1 #{build.sha}`
+                    })
