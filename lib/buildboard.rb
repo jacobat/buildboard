@@ -38,7 +38,7 @@ class Builder
         project_name = project.gsub("#{build_dir}/", '')
         last_build = Dir[File.join(project, '*')].last
         Build.load_file(last_build)
-      }
+      }.sort{|a, b| b.finished_at <=> a.finished_at }
     end
 
     def find(projectname, filename)
